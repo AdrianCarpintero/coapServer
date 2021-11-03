@@ -45,7 +45,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.coap.server.main</mainClass>
+                            <mainClass>com.atos.coap.Server</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -55,7 +55,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.1</version>
                 <configuration>
-                    <mainClass>com.coap.server.main</mainClass>
+                    <mainClass>com.atos.coap.Server</mainClass>
                 </configuration>
             </plugin>
         </plugins>
