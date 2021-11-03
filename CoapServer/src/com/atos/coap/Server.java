@@ -58,7 +58,7 @@ public class Server extends CoapServer {
     		json.put("data", dato);
     		
     		//conection
-    		URL url = new URL ("http://35.216.198.132:8080/Thingworx/Things/CoapTest/Services/UpdateValueJson");
+    		URL url = new URL ("http://35.216.198.132:8080/Thingworx/Things/CoapTest/Services/UpdateValue");
     		HttpURLConnection con = (HttpURLConnection)url.openConnection();
     		con.setRequestMethod("POST");
     		con.setRequestProperty("Authorization", basicAuth);
@@ -147,7 +147,7 @@ public class Server extends CoapServer {
     		//POST DATA
     		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
     		try {
-    		    HttpPost request = new HttpPost("http://35.216.198.132:8080/Thingworx/Things/CoapTest/Services/UpdateValue");
+    		    HttpPost request = new HttpPost("http://35.216.198.132:8080/Thingworx/Things/CoapTest/Services/UpdateValueJson");
     		    StringEntity params = new StringEntity(json.toString(),ContentType.APPLICATION_JSON);
     		    request.addHeader("content-type", "application/json");
     		    request.addHeader("authorization", basicAuth);
