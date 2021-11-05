@@ -9,15 +9,21 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.CoapServer;
@@ -64,7 +70,7 @@ public class Server extends CoapServer {
     		con.setRequestProperty("Authorization", basicAuth);
     		con.setRequestProperty("Content-Type", "application/json; utf-8");
     		con.setDoOutput(true); 		
-    		System.out.println(con.getResponseCode() + " " + con.getResponseMessage());
+    		//System.out.println(con.getResponseCode() + " " + con.getResponseMessage());
     		
     		//POST DATA
     		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
@@ -132,24 +138,26 @@ public class Server extends CoapServer {
         public void sendHumidityResource(String dato) throws IOException {
     		String userpass = "adrian.carpintero@atos.net" + ":" + "thingworx-atos";
     		String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
+    	
     		JSONObject json = new JSONObject();
     		json.put("data", dato);
-    		
     		//conection
-    		URL url = new URL ("http://35.216.198.132:8080/Thingworx/Things/CoapTest/Services/UpdateValueJson");
+    		URL url = new URL ("http://35.216.198.132:8080/Thingworx/Things/CoapTest/Services/UpdateValue");
     		HttpURLConnection con = (HttpURLConnection)url.openConnection();
     		con.setRequestMethod("POST");
     		con.setRequestProperty("Authorization", basicAuth);
+    		con.setRequestProperty("Accept", "application/json");
     		con.setRequestProperty("Content-Type", "application/json; utf-8");
     		con.setDoOutput(true); 		
-    		System.out.println(con.getResponseCode() + " " + con.getResponseMessage());
+    		//System.out.println(con.getResponseCode() + " " + con.getResponseMessage());
     		
     		//POST DATA
     		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
     		try {
-    		    HttpPost request = new HttpPost("http://35.216.198.132:8080/Thingworx/Things/CoapTest/Services/UpdateValueJson");
-    		    StringEntity params = new StringEntity(json.toString(),ContentType.APPLICATION_JSON);
+    		    HttpPost request = new HttpPost("http://35.216.198.132:8080/Thingworx/Things/CoapTest/Services/UpdateValue");
+    		    StringEntity params = new StringEntity(json.toString());
     		    request.addHeader("content-type", "application/json");
+    		    request.addHeader("accept", "application/json");
     		    request.addHeader("authorization", basicAuth);
     		    request.setEntity(params);
     		    
