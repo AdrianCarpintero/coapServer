@@ -49,11 +49,7 @@ public class Server extends CoapServer {
     	add(new HumidityResource());
     	add(new PaSoSResource());
     }
-    //URL url =  new URL("http://35.216.198.132:8080/Thingworx/Things/CoapTest/Services/UpdateValue");
-    //URLConnection thingworx = url.openConnection();
-
-    
-    
+   
     
     class TemperatureResource extends CoapResource {
     	String payload = "";
@@ -178,7 +174,7 @@ public class Server extends CoapServer {
     class PaSoSResource extends CoapResource {
     	String payload = "";
         public PaSoSResource() {
-            super("CruzRoja/ProtocoloPaSoS");
+            super("CruzRoja_ProtocoloPaSoS");
             getAttributes().setTitle("Publish Protocolo_PaSoS");
         }
         public void handlePOST(CoapExchange exchange) {
@@ -201,7 +197,7 @@ public class Server extends CoapServer {
     		String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
     	
     		JSONObject json = new JSONObject();
-    		json.put("tramPaSoS", dato);
+    		json.put("PaSoS", dato);
     		//conection
     		URL url = new URL ("http://35.216.198.132:8080/Thingworx/Things/CoapTest/Services/UpdatePaSoS");
     		HttpURLConnection con = (HttpURLConnection)url.openConnection();
